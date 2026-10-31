@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odds History Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">O</span><div><strong>ODDS HISTORY</strong><small>FOOTBALL ANALYZER</small></div></div>
+    <span class="status"><i></i> ANALİZ PANELİ</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">TARİXİ ƏMSAL ARAŞDIRMASI</p>
+        <h1>Əmsalları müqayisə et.<br><span>Nəticələri araşdır.</span></h1>
+        <p class="intro">Açılış 1X2 əmsallarına və HT/FT nəticələrinə görə keçmiş oyunları tap.</p>
+      </div>
+      <div class="hero-ball">⚽</div>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading"><div><p class="eyebrow">01 / AXTARIŞ</p><h2>Əmsalları daxil et</h2></div><span class="tag">OPENING ODDS</span></div>
+      <div class="form-grid">
+        <label>1 — Ev sahibi<input id="odd1" type="number" min="1.01" step="0.01" value="1.45"></label>
+        <label>X — Heç-heçə<input id="oddX" type="number" min="1.01" step="0.01" value="4.50"></label>
+        <label>2 — Qonaq<input id="odd2" type="number" min="1.01" step="0.01" value="5.50"></label>
+      </div>
+      <div class="controls">
+        <label class="wide">Əmsal fərqi (±)
+          <select id="tolerance"><option value="0.01">± 0.01 — Tam yaxın</option><option value="0.05" selected>± 0.05 — Yaxın</option><option value="0.10">± 0.10</option><option value="0.20">± 0.20</option><option value="0.50">± 0.50</option></select>
+        </label>
+        <label class="wide">Axtarış növü
+          <select id="market"><option value="both">1X2 + HT/FT</option><option value="1x2">Yalnız 1X2</option><option value="htft">HT/FT nəticələri</option></select>
+        </label>
+        <button id="searchBtn">Oyunları tap <span>→</span></button>
+      </div>
+      <p class="hint">Qeyd: Bu ilkin versiyada nümunə məlumatlar var. Real tarixi nəticələr üçün CSV faylı yükləyə bilərsən.</p>
+    </section>
+
+    <section class="results">
+      <div class="section-heading"><div><p class="eyebrow">02 / NƏTİCƏLƏR</p><h2>Oxşar oyunlar</h2></div><span id="count" class="count">0 oyun</span></div>
+      <div id="summary" class="summary-grid">
+        <div class="metric"><small>Tapılan oyun</small><strong id="total">—</strong></div>
+        <div class="metric"><small>Ən çox yekun nəticə</small><strong id="topResult">—</strong></div>
+        <div class="metric"><small>Ən çox HT/FT</small><strong id="topHtft">—</strong></div>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>Tarix</th><th>Matç</th><th>Açılış 1X2</th><th>Hissə</th><th>Yekun</th><th>HT/FT</th></tr></thead><tbody id="matches"></tbody></table>
+        <div id="empty" class="empty">Axtarış üçün əmsalları daxil et.</div>
+      </div>
+      <p class="demo-note"><b>Demo məlumat:</b> Aşağıdakı ilkin oyunlar yalnız proqramın işləməsini göstərmək üçündür, real tarixi mərc arxivi deyil.</p>
+    </section>
+
+    <section class="panel upload-panel">
+      <div class="section-heading"><div><p class="eyebrow">03 / MƏLUMAT BAZASI</p><h2>Öz oyun arxivini yüklə</h2></div><span class="tag">CSV</span></div>
+      <p class="upload-copy">Bukmeykerdən və ya tarixi əmsal mənbəyindən əldə etdiyin CSV faylını yüklə. Proqram onu axtarışa əlavə edəcək.</p>
+      <div class="upload-row"><input type="file" id="csvFile" accept=".csv,text/csv"><button class="secondary" id="downloadTemplate">CSV şablonunu endir</button></div>
+      <p class="hint">Sütunlar: date, home, away, odd1, oddX, odd2, ht_score, ft_score, htft. Əmsallar məhz açılış əmsalları olmalıdır.</p>
+      <div id="uploadStatus" class="upload-status"></div>
+    </section>
+
+    <footer>ODDS HISTORY ANALYZER <span>Bu alət nəticəyə zəmanət vermir; tarixi uyğunluqları araşdırmaq üçündür.</span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
