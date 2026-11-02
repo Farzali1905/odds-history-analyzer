@@ -27,6 +27,23 @@ function search(){
  $("total").textContent=shown.length;
  $("topResult").textContent=mostCommon(shown.map(m=>outcome(m.ft)))||"—";
  $("topHtft").textContent=mostCommon(shown.map(m=>m.htft))||"—";
+ const totalGames = shown.length;
+
+const homeWins = shown.filter(m => outcome(m.ft) === "1").length;
+const draws = shown.filter(m => outcome(m.ft) === "X").length;
+const awayWins = shown.filter(m => outcome(m.ft) === "2").length;
+
+$("homePercent").textContent = totalGames
+ ? (homeWins / totalGames * 100).toFixed(1) + "%"
+ : "0%";
+
+$("drawPercent").textContent = totalGames
+ ? (draws / totalGames * 100).toFixed(1) + "%"
+ : "0%";
+
+$("awayPercent").textContent = totalGames
+ ? (awayWins / totalGames * 100).toFixed(1) + "%"
+ : "0%";
  $("matches").innerHTML="";
  $("empty").style.display=shown.length?"none":"block";
  shown.forEach(m=>{
