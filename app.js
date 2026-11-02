@@ -44,6 +44,34 @@ $("drawPercent").textContent = totalGames
 $("awayPercent").textContent = totalGames
  ? (awayWins / totalGames * 100).toFixed(1) + "%"
  : "0%";
+ let htftBox = $("htftStats");
+
+if (!htftBox) {
+  htftBox = document.createElement("div");
+  htftBox.id = "htftStats";
+  $("summary").insertAdjacentElement("afterend", htftBox);
+}
+
+const htftCounts = {};
+
+shown.forEach(m => {
+  htftCounts[m.htft] = (htftCounts[m.htft] || 0) + 1;
+});
+
+htftBox.innerHTML = `
+  <h3>HT/FT Statistikası</h3>
+  <div class="summary-grid">
+    ${Object.entries(htftCounts)
+      .sort((a,b) => b[1] - a[1])
+      .map(([result, count]) => `
+        <div class="metric">
+          <small>${escapeHtml(result)}</small>
+          <strong>${(count / totalGames * 100).toFixed(1)}%</strong>
+          <small>${count} oyun</small>
+        </div>
+      `).join("")}
+  </div>
+`;
  $("matches").innerHTML="";
  $("empty").style.display=shown.length?"none":"block";
  shown.forEach(m=>{
