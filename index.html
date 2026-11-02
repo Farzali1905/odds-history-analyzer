@@ -31,7 +31,11 @@
       </div>
       <div class="controls">
         <label class="wide">Əmsal fərqi (±)
-          <select id="tolerance"><option value="0.01">± 0.01 — Tam yaxın</option><option value="0.05" selected>± 0.05 — Yaxın</option><option value="0.10">± 0.10</option><option value="0.20">± 0.20</option><option value="0.50">± 0.50</option></select>
+          <select id="tolerance">
+
+  <option value="0" selected>Dəqiq əmsal</option>
+
+</select>
         </label>
         <label class="wide">Axtarış növü
           <select id="market"><option value="both">1X2 + HT/FT</option><option value="1x2">Yalnız 1X2</option><option value="htft">HT/FT nəticələri</option></select>
@@ -49,6 +53,39 @@
         <div class="metric"><small>Ən çox HT/FT</small><strong id="topHtft">—</strong></div>
       </div>
       <div class="table-wrap">
+        <div class="statistics">
+
+  <h3>Oyun statistikası</h3>
+
+  <div class="summary-grid">
+
+    <div class="metric">
+
+      <small>1 — Ev sahibi</small>
+
+      <strong id="homePercent">0%</strong>
+
+    </div>
+
+    <div class="metric">
+
+      <small>X — Heç-heçə</small>
+
+      <strong id="drawPercent">0%</strong>
+
+    </div>
+
+    <div class="metric">
+
+      <small>2 — Qonaq</small>
+
+      <strong id="awayPercent">0%</strong>
+
+    </div>
+
+  </div>
+
+</div>
         <table><thead><tr><th>Tarix</th><th>Matç</th><th>Açılış 1X2</th><th>Hissə</th><th>Yekun</th><th>HT/FT</th></tr></thead><tbody id="matches"></tbody></table>
         <div id="empty" class="empty">Axtarış üçün əmsalları daxil et.</div>
       </div>
