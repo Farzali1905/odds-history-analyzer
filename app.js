@@ -9,7 +9,11 @@ const demoMatches = [
  {date:"2026-03-14",home:"Team M",away:"Team N",o1:1.49,ox:4.42,o2:5.52,ht:"0-1",ft:"1-2",htft:"2/2"},
  {date:"2026-04-22",home:"Team O",away:"Team P",o1:1.45,ox:4.50,o2:5.50,ht:"1-0",ft:"1-2",htft:"1/2"}
 ];
-let archive = [...demoMatches];
+let archive = JSON.parse(localStorage.getItem("oddsArchive")) || [...demoMatches];
+
+function saveArchive() {
+ localStorage.setItem("oddsArchive", JSON.stringify(archive));
+}
 const $ = id => document.getElementById(id);
 const num = v => Number(v);
 function outcome(score){const [h,a]=score.split("-").map(Number);return h>a?"1":h<a?"2":"X"}
@@ -46,7 +50,7 @@ $("csvFile").addEventListener("change",async e=>{
    const c=parseCSVLine(line);
    return {date:c[idx("date")],home:c[idx("home")],away:c[idx("away")],o1:num(c[idx("odd1")]),ox:num(c[idx("oddx")]),o2:num(c[idx("odd2")]),ht:c[idx("ht_score")],ft:c[idx("ft_score")],htft:c[idx("htft")]};
   }).filter(m=>[m.o1,m.ox,m.o2].every(Number.isFinite));
-  archive=[...archive,...imported];$("uploadStatus").textContent=imported.length+" oyun arxivə əlavə edildi.";search();
+  archive=[...archive,...imported]; saveArchive();$("uploadStatus").textContent=imported.length+" oyun arxivə əlavə edildi.";search();
  }catch(err){$("uploadStatus").textContent="Xəta: "+err.message;$("uploadStatus").style.color="#ff9b9b"}
 });
 function parseCSVLine(line){const out=[];let cur="",quote=false;for(let i=0;i<line.length;i++){const ch=line[i];if(ch==='"'){if(quote&&line[i+1]==='"'){cur+='"';i++}else quote=!quote}else if(ch===","&&!quote){out.push(cur.trim());cur=""}else cur+=ch}out.push(cur.trim());return out}
